@@ -28,7 +28,16 @@ body {
   display: flex;
   align-items: center;
 }
-.side-logo { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; margin-right: 10px; border: 1px solid #fff; }
+.side-logo {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  margin-right: 10px;
+  border: 1px solid #fff;
+  display: inline-block;
+}
 .sidebar a {
   color: #0f172a;
   text-decoration: none;

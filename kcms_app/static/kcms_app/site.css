@@ -2,7 +2,17 @@
 body { margin: 0; font-family: Arial, sans-serif; background: #eef2f7; color: #1f2937; }
 .top-nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; background: #111827; }
 .brand { color: #f9fafb; text-decoration: none; font-weight: 700; font-size: 20px; }
-.brand-logo { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-right: 8px; border: 1px solid #f3f4f6; }
+.brand-logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  vertical-align: middle;
+  margin-right: 8px;
+  border: 1px solid #f3f4f6;
+  display: inline-block;
+}
 .top-links { display: flex; gap: 16px; align-items: center; }
 .top-links a { color: #f9fafb; text-decoration: none; }
 .btn-primary { background: #facc15; color: #111827; padding: 8px 14px; border-radius: 6px; text-decoration: none; border: none; cursor: pointer; font-weight: 700; }
