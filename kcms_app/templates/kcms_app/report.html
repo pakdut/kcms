@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KCMS Summary Report</title>
+  <link rel="stylesheet" href="{% static 'kcms_app/dashboard.css' %}" />
+</head>
+<body>
+  <main class="content" style="margin-left: 0;">
+    <section class="panel">
+      <h1>KCMS Summary Report</h1>
+      <p><strong>Range:</strong> {{ start_date|default:"All" }} to {{ end_date|default:"All" }}</p>
+      <div class="stats">
+        <article><h3>Total Cases</h3><p>{{ total_cases }}</p></article>
+        <article><h3>Pending Cases</h3><p>{{ pending_cases }}</p></article>
+        <article><h3>Settled Cases</h3><p>{{ settled_cases }}</p></article>
+        <article><h3>Blacklisted</h3><p>{{ total_blacklisted }}</p></article>
+      </div>
+      <!-- Summary report is print-ready for documentation and panel review. -->
+      <button class="small-btn" onclick="window.print()">Print Report</button>
+      <a class="small-btn neutral-btn" href="{% url 'kcms_app:dashboard' %}?start_date={{ start_date }}&end_date={{ end_date }}">Back to Dashboard</a>
+    </section>
+
+    <section class="panel">
+      <h2>Recent Case Entries</h2>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Case ID</th>
+            <th>Complainant</th>
+            <th>Respondent</th>
+            <th>Case Title</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for case in case_records %}
+            <tr>
+              <td>{{ case.case_id }}</td>
+              <td>{{ case.complainant_name }}</td>
+              <td>{{ case.respondent_name }}</td>
+              <td>{{ case.case_title }}</td>
+              <td>{{ case.get_status_display }}</td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="5">No records in selected date range.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

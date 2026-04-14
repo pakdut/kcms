@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KP Form No. 9 - Summons</title>
+  <link rel="stylesheet" href="{% static 'kcms_app/kp-form.css' %}" />
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="{% url 'kcms_app:dashboard' %}#kp-documents">Back</a>
+    <div class="form-label">KP Form No. 9</div>
+    <div class="header-block">
+      <div class="red">Republic of the Philippines</div>
+      <div class="red">Province of Albay</div>
+      <div class="inline-row red">
+        Municipality of&nbsp;<input class="line" type="text" style="width:140px;" />
+      </div>
+      <div class="inline-row red">
+        Barangay&nbsp;<input class="line" type="text" style="width:180px;" />
+      </div>
+    </div>
+    <div class="section-title">OFFICE OF THE LUPONG TAGAPAMAYAPA</div>
+    <form>
+      <div class="parties-grid">
+        <div class="party-col">
+          <input class="block-line" type="text" />
+          <input class="block-line" type="text" />
+          <div class="label-under">Complainant/s</div>
+          <div style="margin: 8px 0; padding-left: 4px;">- against -</div>
+          <input class="block-line" type="text" />
+          <input class="block-line" type="text" />
+          <div class="label-under">Respondent/s</div>
+        </div>
+        <div class="party-col" style="padding-top: 4px;">
+          <div class="inline-row" style="justify-content:flex-start;">
+            Barangay Case No.&nbsp;<input class="line" type="text" style="width:140px;" />
+          </div>
+          <div style="margin-top:4px;">
+            <span>For:&nbsp;</span><input class="line" type="text" style="width:200px;" />
+          </div>
+          <div style="margin-top:6px;">
+            <input class="block-line" type="text" style="margin-top: 4px;" />
+          </div>
+        </div>
+      </div>
+      <div class="section-title">S U M M O N S</div>
+      <div class="to-section">
+        <div class="to-label">TO:</div>
+        <div class="to-inputs">
+          <div style="display:flex; gap:20px;">
+            <input class="line" type="text" style="flex:1;" />
+            <input class="line" type="text" style="flex:1;" />
+          </div>
+          <input class="block-line" type="text" />
+        </div>
+      </div>
+      <div class="respondents-label">Respondents</div>
+      <div class="body-text">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You are hereby summoned to appear before me in person, together with your witnesses, on the
+        <input class="line" type="text" style="width:55px;" /> day of
+        <input class="line" type="text" style="width:120px;" />, 20<input class="line" type="text" style="width:40px;" />, at
+        <input class="line" type="text" style="width:90px;" /> o'clock in the morning/afternoon, then
+        and there to answer to a complaint made before me, copy of which is attached hereto, for
+        mediation/conciliation of your dispute with complainant/s.
+      </div>
+      <div class="body-text">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;You are hereby warned that if you refuse or willfully fail to appear in obedience to this summons,
+        you may be barred from filing any counterclaim arising from said complaint.
+      </div>
+      <div class="body-text">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="bold">FAIL NOT</span> or else face punishment as for contempt of court.
+      </div>
+      <div class="body-text">
+        This <input class="line" type="text" style="width:70px;" /> day of
+        <input class="line" type="text" style="width:90px;" />, 20<input class="line" type="text" style="width:45px;" />.
+      </div>
+      <div class="signature-area">
+        <div class="sig-block">
+          <input class="line" type="text" style="width:260px;" value="Hon. Susan B. Enriquez" />
+          <div class="sig-label">Punong Barangay /Lupon Chairman</div>
+        </div>
+      </div>
+      <button type="button" class="print-btn" onclick="window.print()">Print / Save as PDF</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,198 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KCMS Dashboard</title>
+  <link rel="stylesheet" href="{% static 'kcms_app/dashboard.css' %}" />
+</head>
+<body>
+  <aside class="sidebar">
+    <h2><img src="{% url 'kcms_app:logo_image' %}" alt="Logo" class="side-logo" /> KCMS</h2>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#case-records">Case Records</a>
+    <a href="#kp-documents">KP Document Forms</a>
+    <a href="#blacklisted-records">Blacklisted Records</a>
+    <a class="logout-link" href="{% url 'kcms_app:logout' %}">Log Out</a>
+  </aside>
+
+  <main class="content">
+    <header class="top-strip">
+      <div class="crumbs">KCMS Dashboard</div>
+      <nav class="top-actions">
+        <a href="#case-records">Case Records</a>
+        <a href="#kp-documents">KP Document Forms</a>
+        <a href="#blacklisted-records">Blacklisted Records</a>
+        <a href="{% url 'kcms_app:settings' %}">Settings</a>
+        <a class="logout-link" href="{% url 'kcms_app:logout' %}">Log Out</a>
+      </nav>
+    </header>
+
+    {% if messages %}
+      <section class="panel">
+        {% for message in messages %}
+          <p class="message {{ message.tags }}">{{ message }}</p>
+        {% endfor %}
+      </section>
+    {% endif %}
+
+    <section id="dashboard" class="panel">
+      <h1>Dashboard</h1>
+      <form class="date-filter" method="get">
+        <label for="startDate">From</label>
+        <input id="startDate" type="date" name="start_date" value="{{ start_date }}" />
+        <label for="endDate">To</label>
+        <input id="endDate" type="date" name="end_date" value="{{ end_date }}" />
+        <button type="submit" class="small-btn">Apply</button>
+        <a class="small-btn neutral-btn" href="{% url 'kcms_app:dashboard' %}">Reset</a>
+      </form>
+      <div class="stats">
+        <article><h3>Total Cases</h3><p>{{ total_cases }}</p></article>
+        <article><h3>Pending Cases</h3><p>{{ pending_cases }}</p></article>
+        <article><h3>Settled Cases</h3><p>{{ settled_cases }}</p></article>
+        <article><h3>Blacklisted</h3><p>{{ total_blacklisted }}</p></article>
+      </div>
+      <a class="btn-link" href="#kp-documents">Generate KP Form</a>
+      <a class="btn-link" href="{% url 'kcms_app:dashboard_report' %}?start_date={{ start_date }}&end_date={{ end_date }}">Print Summary Report</a>
+    </section>
+
+    <section class="panel">
+      <h2>Recent Case Activity</h2>
+      <ul class="recent-list">
+        {% for case in recent_cases %}
+          <li class="recent-item">
+            <span class="case-pill">#{{ case.case_id }}</span>
+            <span class="recent-title">{{ case.case_title }}</span>
+            <span class="status-pill {% if case.status == 'settled' %}status-settled{% else %}status-pending{% endif %}">
+              {{ case.get_status_display }}
+            </span>
+            <span class="recent-meta">by {{ case.complainant_name }}</span>
+          </li>
+        {% empty %}
+          <li>No recent case activity yet.</li>
+        {% endfor %}
+      </ul>
+    </section>
+
+    <section id="case-records" class="panel">
+      <h2>Case Records</h2>
+      <input id="caseSearch" class="search" type="search" placeholder="Search case records..." />
+      <a class="small-btn" href="{% url 'kcms_app:export_case_records_csv' %}?start_date={{ start_date }}&end_date={{ end_date }}">Export Case Records CSV</a>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Case ID</th>
+            <th>Complainant Name</th>
+            <th>Case Title</th>
+            <th>Respondent Name</th>
+            <th>Status</th>
+            <th>Created On</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="caseTable">
+          {% for case in case_records %}
+            <tr>
+              <td>{{ case.case_id }}</td>
+              <td>{{ case.complainant_name }}</td>
+              <td>{{ case.case_title }}</td>
+              <td>{{ case.respondent_name }}</td>
+              <td>
+                <span class="status-pill {% if case.status == 'settled' %}status-settled{% else %}status-pending{% endif %}">
+                  {{ case.get_status_display }}
+                </span>
+              </td>
+              <td>{{ case.created_on|date:"Y-m-d H:i" }}</td>
+              <td>
+                <form method="post" action="{% url 'kcms_app:toggle_case_status' case.case_id %}" class="inline-form">
+                  {% csrf_token %}
+                  <button type="submit" class="small-btn">
+                    Mark as {% if case.status == 'pending' %}Settled{% else %}Pending{% endif %}
+                  </button>
+                </form>
+                <form method="post" action="{% url 'kcms_app:add_case_to_blacklist' case.case_id %}" class="inline-form">
+                  {% csrf_token %}
+                  <button type="submit" class="small-btn danger-btn">Add to Blacklisted</button>
+                </form>
+              </td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="7">No case records yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </section>
+
+    <section id="kp-documents" class="panel">
+      <h2>Document Generators</h2>
+      <div class="form-links">
+        <a href="{% url 'kcms_app:kp_form_7' %}">KP Form 7</a>
+        <a href="{% url 'kcms_app:kp_form_9' %}">KP Form 9</a>
+        <a href="{% url 'kcms_app:kp_form_14' %}">KP Form 14</a>
+        <a href="{% url 'kcms_app:kp_form_20' %}">KP Form 20</a>
+      </div>
+    </section>
+
+    <section id="blacklisted-records" class="panel">
+      <h2>Blacklisted Records</h2>
+      <input id="blacklistSearch" class="search" type="search" placeholder="Search blacklisted records..." />
+      <a class="small-btn" href="{% url 'kcms_app:export_blacklisted_csv' %}?start_date={{ start_date }}&end_date={{ end_date }}">Export Blacklisted CSV</a>
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Blacklist ID</th>
+            <th>Blacklisted Name</th>
+            <th>Case Title</th>
+            <th>Created On</th>
+          </tr>
+        </thead>
+        <tbody id="blacklistTable">
+          {% for person in blacklisted_records %}
+            <tr>
+              <td>{{ person.blacklisted_id }}</td>
+              <td>{{ person.blacklisted_name }}</td>
+              <td>{{ person.case_title }}</td>
+              <td>{{ person.created_on|date:"Y-m-d H:i" }}</td>
+            </tr>
+          {% empty %}
+            <tr><td colspan="4">No blacklisted records yet.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Reusable client-side table filter for both records tables.
+    function attachTableFilter(inputId, tableId) {
+      const input = document.getElementById(inputId);
+      const rows = document.querySelectorAll(`#${tableId} tr`);
+      if (!input || !rows.length) return;
+      input.addEventListener("input", function () {
+        const query = this.value.trim().toLowerCase();
+        rows.forEach((row) => {
+          if (row.querySelector("td[colspan]")) return;
+          row.style.display = row.innerText.toLowerCase().includes(query) ? "" : "none";
+        });
+      });
+    }
+    attachTableFilter("caseSearch", "caseTable");
+    attachTableFilter("blacklistSearch", "blacklistTable");
+
+    // Prevent accidental logouts during admin work.
+    document.querySelectorAll(".logout-link").forEach((link) => {
+      link.addEventListener("click", (event) => {
+        const shouldLogout = window.confirm("Are you sure you want to log out?");
+        if (!shouldLogout) {
+          event.preventDefault();
+        }
+      });
+    });
+  </script>
+</body>
+</html>

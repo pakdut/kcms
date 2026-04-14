@@ -1,0 +1,24 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: Arial, sans-serif; background: #eef2f7; color: #1f2937; }
+.top-nav { display: flex; justify-content: space-between; align-items: center; padding: 12px 24px; background: #111827; }
+.brand { color: #f9fafb; text-decoration: none; font-weight: 700; font-size: 20px; }
+.brand-logo { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; vertical-align: middle; margin-right: 8px; border: 1px solid #f3f4f6; }
+.top-links { display: flex; gap: 16px; align-items: center; }
+.top-links a { color: #f9fafb; text-decoration: none; }
+.btn-primary { background: #facc15; color: #111827; padding: 8px 14px; border-radius: 6px; text-decoration: none; border: none; cursor: pointer; font-weight: 700; }
+.hero { background: linear-gradient(135deg, #facc15, #f9a825); text-align: center; padding: 40px 20px; border-bottom: 3px solid #111827; }
+.hero h1 { margin: 0 0 8px; }
+.hero p { font-weight: 700; }
+.hero-photo { width: 80px; height: 80px; object-fit: cover; border-radius: 50%; border: 2px solid #111827; margin-bottom: 10px; background: #fff; }
+.container { max-width: 1000px; margin: 0 auto; padding: 24px; }
+.card { background: #fff; border: 1px solid #dbe5f0; border-radius: 10px; padding: 18px; margin-bottom: 16px; box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04); }
+.grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.footer { text-align: center; padding: 16px; background: #111827; color: #f9fafb; }
+.auth-body { min-height: 100vh; }
+.auth-wrap { display: flex; justify-content: center; align-items: center; min-height: calc(100vh - 64px); padding: 24px; }
+.auth-card { width: 100%; max-width: 420px; background: #fff; border-radius: 10px; padding: 24px; border: 1px solid #dbe5f0; display: grid; gap: 10px; box-shadow: 0 10px 24px rgba(0,0,0,0.08); }
+.auth-card input { padding: 10px; border-radius: 6px; border: 1px solid #cbd5e1; }
+.message-list { margin-bottom: 4px; }
+.message { padding: 8px; border-radius: 6px; font-size: 14px; }
+.message.error { background: #fee2e2; color: #991b1b; }
+.message.success { background: #dcfce7; color: #14532d; }

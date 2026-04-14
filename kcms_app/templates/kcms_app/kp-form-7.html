@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KP Form No. 7 - Complaint</title>
+  <link rel="stylesheet" href="{% static 'kcms_app/kp-form.css' %}" />
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="{% url 'kcms_app:dashboard' %}#kp-documents">Back</a>
+    <div class="form-label">KP Form No. 7</div>
+    <div class="header-block">
+      <div>Republic of the Philippines</div>
+      <div>Province of Albay</div>
+      <div class="inline-row">
+        Municipality of&nbsp;<input class="line" name="municipality" form="form7" type="text" style="width:140px;" value="{{ form_data.municipality|default:'' }}" />
+      </div>
+      <div class="inline-row">
+        Barangay&nbsp;<input class="line" name="barangay" form="form7" type="text" style="width:180px;" value="{{ form_data.barangay|default:'' }}" />
+      </div>
+    </div>
+    <div class="section-title" style="letter-spacing: 2px;">OFFICE OF THE LUPONG TAGAPAMAYAPA</div>
+
+    {% if messages %}
+      {% for message in messages %}
+        <p class="message {{ message.tags }}">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post" id="form7">
+      {% csrf_token %}
+      <div class="parties-grid">
+        <div class="party-col">
+          <input class="block-line" name="complainant_name" type="text" value="{{ form_data.complainant_name|default:'' }}" required />
+          <div class="label-under">Complainant/s</div>
+          <div style="margin: 8px 0; padding-left: 4px;">-against-</div>
+          <input class="block-line" name="respondent_name" type="text" value="{{ form_data.respondent_name|default:'' }}" required />
+          <input class="block-line" name="respondent_name_2" type="text" value="{{ form_data.respondent_name_2|default:'' }}" />
+          <div class="label-under">Respondent/s</div>
+        </div>
+        <div class="party-col" style="padding-top: 4px;">
+          <div class="inline-row" style="justify-content:flex-start;">
+            Barangay Case No.&nbsp;<input class="line" name="barangay_case_no" type="text" style="width:140px;" value="{{ form_data.barangay_case_no|default:'' }}" />
+          </div>
+          <div style="margin-top:4px; display:flex; gap:4px; align-items:flex-end;">
+            <span>For:</span>
+            <input class="line" name="case_title" type="text" style="flex:1;" value="{{ form_data.case_title|default:'' }}" required />
+          </div>
+          <input class="block-line" name="case_title_line_2" type="text" value="{{ form_data.case_title_line_2|default:'' }}" />
+          <input class="block-line" name="case_title_line_3" type="text" value="{{ form_data.case_title_line_3|default:'' }}" />
+        </div>
+      </div>
+
+      <div class="section-title">C O M P L A I N T</div>
+      <div class="body-text">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I/WE hereby complain against above named respondent/s for violating my/our rights and interests in the following manner:
+      </div>
+      <div style="margin-bottom: 30px;">
+        <input class="block-line" name="complaint_line_1" type="text" style="margin-bottom: 10px;" value="{{ form_data.complaint_line_1|default:'' }}" />
+        <input class="block-line" name="complaint_line_2" type="text" style="margin-bottom: 10px;" value="{{ form_data.complaint_line_2|default:'' }}" />
+        <input class="block-line" name="complaint_line_3" type="text" value="{{ form_data.complaint_line_3|default:'' }}" />
+      </div>
+      <div class="body-text">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;THEREFORE, I/WE pray that the following relief/s be granted to me/us in accordance with law and/or equity.
+      </div>
+      <div style="margin-bottom: 30px;">
+        <input class="block-line" name="relief_line_1" type="text" style="margin-bottom: 10px;" value="{{ form_data.relief_line_1|default:'' }}" />
+        <input class="block-line" name="relief_line_2" type="text" style="margin-bottom: 10px;" value="{{ form_data.relief_line_2|default:'' }}" />
+        <input class="block-line" name="relief_line_3" type="text" style="width: 50%;" value="{{ form_data.relief_line_3|default:'' }}" />
+      </div>
+      <div class="body-text" style="padding-left: 60px;">
+        Made this <input class="line" name="made_day" type="text" style="width:80px;" value="{{ form_data.made_day|default:'' }}" /> day of
+        <input class="line" name="made_month" type="text" style="width:110px;" value="{{ form_data.made_month|default:'' }}" />, 20<input class="line" name="made_year" type="text" style="width:40px;" value="{{ form_data.made_year|default:'' }}" />.
+      </div>
+      <div class="signature-area">
+        <div class="sig-block">
+          <input class="line" name="complainant_signature" type="text" style="width:260px;" value="{{ form_data.complainant_signature|default:'' }}" />
+          <div class="sig-label">(Complainant/s)</div>
+        </div>
+      </div>
+      <div class="body-text" style="margin-top: 20px; padding-left: 60px;">
+        Received and filed this <input class="line" name="received_day" type="text" style="width:80px;" value="{{ form_data.received_day|default:'' }}" /> day of
+        <input class="line" name="received_month" type="text" style="width:100px;" value="{{ form_data.received_month|default:'' }}" />, 20<input class="line" name="received_year" type="text" style="width:40px;" value="{{ form_data.received_year|default:'' }}" />.
+      </div>
+      <div class="signature-area">
+        <div class="sig-block">
+          <input class="line" type="text" style="width:260px;" value="Hon. Susan B. Enriquez" />
+          <div class="sig-label">Punong Barangay/Lupon Chairman</div>
+        </div>
+      </div>
+
+      <input type="hidden" name="confirm_continue" id="confirmContinue" value="0" />
+      <button type="submit" class="print-btn">Print as PDF</button>
+    </form>
+  </div>
+
+  {% if show_blacklist_warning %}
+    <div class="modal">
+      <div class="modal-content">
+        <p>The respondent is already in Blacklisted Record, do you wish to continue printing this document?</p>
+        <div class="modal-actions">
+          <button type="button" onclick="continuePrint()">Yes</button>
+          <button type="button" onclick="closeWarning()">No</button>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  <script>
+    // User confirmed printing even if respondent exists in blacklist.
+    function continuePrint() {
+      document.getElementById("confirmContinue").value = "1";
+      document.getElementById("form7").submit();
+    }
+
+    // User cancelled, so warning closes and form values stay untouched.
+    function closeWarning() {
+      const modal = document.querySelector(".modal");
+      if (modal) {
+        modal.remove();
+      }
+    }
+
+    // Trigger browser print only after backend save and validation.
+    {% if trigger_print %}
+      window.print();
+    {% endif %}
+  </script>
+</body>
+</html>

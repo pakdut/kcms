@@ -1,0 +1,101 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KP Form No. 20 - Certification to File Action</title>
+  <link rel="stylesheet" href="{% static 'kcms_app/kp-form.css' %}" />
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="{% url 'kcms_app:dashboard' %}#kp-documents">Back</a>
+    <div class="form-label" style="font-style: italic;">(KP Form No. 20)</div>
+    <div class="header-block">
+      <div>Republic of the Philippines</div>
+      <div>Province of Albay</div>
+      <div class="inline-row">
+        City of&nbsp;<input class="line" type="text" style="width:140px;" name="city" form="form20" value="{{ form_data.city|default:'' }}" />
+      </div>
+      <div class="inline-row">
+        Barangay&nbsp;<input class="line" type="text" style="width:180px;" name="barangay" form="form20" value="{{ form_data.barangay|default:'' }}" />
+      </div>
+      <div style="margin-top: 4px;">-o0o-</div>
+    </div>
+    <div class="section-title" style="letter-spacing: 2px;">OFFICE OF THE LUPONG TAGAPAMAYAPA</div>
+    <hr style="border: none; border-top: 3px double #333; margin-bottom: 16px;" />
+
+    {% if messages %}
+      {% for message in messages %}
+        <p class="message {{ message.tags }}">{{ message }}</p>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post" id="form20">
+      {% csrf_token %}
+      <div class="parties-grid">
+        <div class="party-col">
+          <input class="block-line" type="text" name="complainant_name" value="{{ form_data.complainant_name|default:'' }}" />
+          <input class="block-line" type="text" name="complainant_name_2" value="{{ form_data.complainant_name_2|default:'' }}" />
+          <div class="label-under">Complainant/s</div>
+          <div style="margin: 8px 0; padding-left: 4px;">-against-</div>
+          <input class="block-line" type="text" name="blacklisted_name" value="{{ form_data.blacklisted_name|default:'' }}" required />
+          <div class="label-under">Respondent/s</div>
+        </div>
+        <div class="party-col" style="padding-top: 4px;">
+          <div class="inline-row" style="justify-content:flex-start;">
+            Barangay Case No.&nbsp;<input class="line" type="text" style="width:140px;" name="barangay_case_no" value="{{ form_data.barangay_case_no|default:'' }}" />
+          </div>
+          <div style="margin-top:4px; display:flex; gap:4px; align-items:flex-end;">
+            <span>For:</span>
+            <input class="line" type="text" style="flex:1;" name="case_title" value="{{ form_data.case_title|default:'' }}" required />
+          </div>
+          <input class="block-line" type="text" name="case_title_line_2" value="{{ form_data.case_title_line_2|default:'' }}" />
+        </div>
+      </div>
+      <div class="section-title" style="letter-spacing: 2px;">CERTIFICATION TO FILE ACTION</div>
+      <div class="body-text"><span class="bold">This is to certify that:</span></div>
+      <ol style="padding-left: 30px; line-height: 2; margin-bottom: 16px; text-align: justify;">
+        <li style="margin-bottom: 10px;">
+          There has been a personal confrontation between the parties before the Punong Barangay/Pangkat ng Tagapagkasundo;
+        </li>
+        <li style="margin-bottom: 10px;">
+          An amicable settlement/ agreement to arbitrate was reached;
+        </li>
+        <li style="margin-bottom: 10px;">
+          The settlement/agreement has been repudiated in a statement sworn to before the Punong Barangay by
+          <input class="line" type="text" style="width:160px;" name="repudiated_by" value="{{ form_data.repudiated_by|default:'' }}" /> on ground of
+          <input class="line" type="text" style="width:130px;" name="repudiation_ground" value="{{ form_data.repudiation_ground|default:'' }}" />; and
+        </li>
+        <li style="margin-bottom: 10px;">
+          Therefore, the corresponding complaint for the dispute may now be filed in court/government office.
+        </li>
+      </ol>
+      <div class="body-text">
+        This <input class="line" type="text" style="width:55px;" name="issued_day" value="{{ form_data.issued_day|default:'' }}" /> day of
+        <input class="line" type="text" style="width:150px;" name="issued_month" value="{{ form_data.issued_month|default:'' }}" />, 20<input class="line" type="text" style="width:40px;" name="issued_year" value="{{ form_data.issued_year|default:'' }}" />.
+      </div>
+      <div class="signature-area" style="margin-top: 30px;">
+        <div class="sig-block">
+          <input class="line" type="text" style="width:260px;" value="Joy Gemang" />
+          <div class="sig-label">Lupon Secretary</div>
+        </div>
+      </div>
+      <div style="margin-top: 30px;">
+        <div style="margin-bottom: 24px;">Attested:</div>
+        <div style="width: 260px;">
+          <input class="line" type="text" style="width:260px;" value="Hon. Susan B. Enriquez" />
+          <div class="sig-label" style="text-align: center;">Lupon Chairman</div>
+        </div>
+      </div>
+      <button type="submit" class="print-btn">Print as PDF</button>
+    </form>
+  </div>
+  <script>
+    // Trigger print only after blacklisted record is saved successfully.
+    {% if trigger_print %}
+      window.print();
+    {% endif %}
+  </script>
+</body>
+</html>

@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>KP Form No. 14 - Agreement for Arbitration</title>
+  <link rel="stylesheet" href="{% static 'kcms_app/kp-form.css' %}" />
+</head>
+<body>
+  <div class="page">
+    <a class="back-link" href="{% url 'kcms_app:dashboard' %}#kp-documents">Back</a>
+    <div class="form-label">KP Form No. 14</div>
+    <div class="header-block">
+      <div>Republic of the Philippines</div>
+      <div>Province of Albay</div>
+      <div class="inline-row">
+        Municipality of&nbsp;<input class="line" type="text" style="width:140px;" />
+      </div>
+      <div class="inline-row">
+        Barangay&nbsp;<input class="line" type="text" style="width:180px;" />
+      </div>
+      <div style="margin-top: 4px;">-o0o-</div>
+    </div>
+    <div class="section-title" style="letter-spacing: 2px;">OFFICE OF THE LUPONG TAGAPAMAYAPA</div>
+    <hr style="border: none; border-top: 3px double #333; margin-bottom: 16px;" />
+    <form>
+      <div class="parties-grid">
+        <div class="party-col">
+          <input class="block-line" type="text" />
+          <input class="block-line" type="text" />
+          <div class="label-under">Complaint/s</div>
+          <div style="margin: 8px 0; padding-left: 4px;">-&nbsp;&nbsp;against –</div>
+          <input class="block-line" type="text" />
+          <div class="label-under">Respondent/s</div>
+        </div>
+        <div class="party-col" style="padding-top: 4px;">
+          <div class="inline-row" style="justify-content:flex-start;">
+            Barangay Case No.&nbsp;<input class="line" type="text" style="width:140px;" />
+          </div>
+          <div style="margin-top:4px; display:flex; gap:4px; align-items:flex-end;">
+            <span>For:</span>
+            <input class="line" type="text" style="flex:1;" />
+          </div>
+          <input class="block-line" type="text" />
+        </div>
+      </div>
+      <div class="section-title" style="letter-spacing: 2px;">AGREEMENT FOR ARBITRATION</div>
+      <div class="body-text">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We hereby agree to submit our dispute for arbitration to the Punong Barangay/ <em>Pangkat ng Tagapagkasundo</em> (Please cross out whichever is not applicable) and bind ourselves to comply with the award that may be rendered thereon. We have made this agreement freely with a full understanding of its nature and consequences.
+      </div>
+      <div class="body-text" style="padding-left: 60px; margin-top: 16px;">
+        Entered into this <input class="line" type="text" style="width:40px;" /> day of
+        <input class="line" type="text" style="width:130px;" />, 20<input class="line" type="text" style="width:40px;" />.
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0 60px; margin-top: 30px; margin-bottom: 10px; padding: 0 20px;">
+        <div>
+          <input class="line" type="text" style="width:100%; margin-bottom: 8px;" />
+          <div class="label-under" style="margin-bottom: 6px;">Complainant/s</div>
+          <div class="sig-line"></div>
+        </div>
+        <div>
+          <input class="line" type="text" style="width:100%; margin-bottom: 8px;" />
+          <div class="label-under" style="margin-bottom: 6px;">Respondent/s</div>
+          <div class="sig-line"></div>
+        </div>
+      </div>
+      <div style="margin-top: 24px;">
+        <div class="bold" style="margin-bottom: 10px;">ATTESTATION</div>
+        <div class="body-text">
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;I hereby certify that the foregoing Agreement for Arbitration was entered into by the parties and voluntarily, after I had explained to them the nature and consequences of such agreement.
+        </div>
+      </div>
+      <div class="signature-area">
+        <div class="sig-block">
+          <input class="line" type="text" style="width:260px;" value="Hon. Susan B. Enriquez" />
+          <div class="sig-label">Punong Barangay/Pangkat Chairman</div>
+        </div>
+      </div>
+      <button type="button" class="print-btn" onclick="window.print()">Print as PDF</button>
+    </form>
+  </div>
+</body>
+</html>

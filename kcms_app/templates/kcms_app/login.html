@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KCMS - Admin Login</title>
+  <link rel="stylesheet" href="{% static 'kcms_app/site.css' %}" />
+</head>
+<body class="auth-body">
+  <nav class="top-nav">
+    <a class="brand" href="{% url 'kcms_app:home' %}">
+      <img src="{% url 'kcms_app:logo_image' %}" alt="Kinasang-an Logo" class="brand-logo" />
+      KCMS
+    </a>
+    <a class="btn-primary" href="{% url 'kcms_app:home' %}">Home</a>
+  </nav>
+
+  <main class="auth-wrap">
+    <form method="post" class="auth-card">
+      {% csrf_token %}
+      <h2>Log In as Administrator</h2>
+
+      {% if messages %}
+        <div class="message-list">
+          {% for message in messages %}
+            <p class="message {{ message.tags }}">{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      <label for="username">Username</label>
+      <input id="username" name="username" type="text" required autocomplete="username" />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" required autocomplete="current-password" />
+
+      <button type="submit" class="btn-primary">Log In</button>
+    </form>
+  </main>
+</body>
+</html>

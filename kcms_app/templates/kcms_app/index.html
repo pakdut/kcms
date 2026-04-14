@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KCMS - Kinasang-an Case Management System</title>
+  <link rel="stylesheet" href="{% static 'kcms_app/site.css' %}" />
+</head>
+<body>
+  <nav class="top-nav">
+    <a class="brand" href="{% url 'kcms_app:home' %}">
+      <img src="{% url 'kcms_app:logo_image' %}" alt="Kinasang-an Logo" class="brand-logo" />
+      KCMS
+    </a>
+    <div class="top-links">
+      <a href="#about">About</a>
+      <a href="#contact">Contact</a>
+      <a class="btn-primary" href="{% url 'kcms_app:login' %}">Log In</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <img src="{% url 'kcms_app:hero_image' %}" alt="Barangay Kinasang-an" class="hero-photo" />
+    <h1>Kinasang-an Case Management System</h1>
+    <p>Lupon Tagapamayapa</p>
+  </header>
+
+  <main class="container">
+    <section id="about" class="card">
+      <h2>About</h2>
+      <p>
+        A Lupon Tagapamayapa is a body of community members in each Philippine barangay that helps
+        residents resolve disputes through amicable settlement under the Katarungang Pambarangay system.
+      </p>
+      <p>
+        This system centralizes KP form generation and records for faster and more organized case
+        management by the barangay administrator.
+      </p>
+    </section>
+
+    <section class="grid-3">
+      <article class="card">
+        <h3>Amicable Settlement</h3>
+        <p>Encourages peaceful agreement before court litigation.</p>
+      </article>
+      <article class="card">
+        <h3>Dispute Resolution</h3>
+        <p>Handles qualified minor disputes in the barangay level.</p>
+      </article>
+      <article class="card">
+        <h3>Community Harmony</h3>
+        <p>Maintains good relations by resolving conflicts early.</p>
+      </article>
+    </section>
+  </main>
+
+  <footer id="contact" class="footer">
+    <div>Barangay Kinasang-an</div>
+    <div>Kinasang_an.12 | kinasangan@gmail.com</div>
+    <div>&copy; 2026 Barangay Kinasang-an. All Rights Reserved.</div>
+  </footer>
+</body>
+</html>

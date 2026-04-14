@@ -1,0 +1,249 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  background: #d0d0d0;
+  display: flex;
+  justify-content: center;
+  padding: 40px 20px;
+}
+
+.page {
+  background: white;
+  width: 750px;
+  min-height: 1056px;
+  padding: 60px 70px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.back-link {
+  text-decoration: none;
+  display: inline-block;
+  margin-bottom: 12px;
+  color: #0057b7;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+}
+
+.form-label {
+  font-style: italic;
+  margin-bottom: 18px;
+}
+
+.center {
+  text-align: center;
+}
+
+.red {
+  color: inherit;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.section-title {
+  text-align: center;
+  font-weight: bold;
+  letter-spacing: 6px;
+  font-size: 15px;
+  margin: 28px 0 20px;
+}
+
+/* Inline input — looks like a blank line */
+input.line {
+  border: none;
+  border-bottom: 1px solid #333;
+  outline: none;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  background: transparent;
+  padding: 1px 4px;
+  display: inline-block;
+  text-align: center;
+}
+
+input.line:focus {
+  border-bottom: 2px solid #0057b7;
+  background: #eef4ff;
+}
+
+/* Block input — full width underline row */
+input.block-line {
+  border: none;
+  border-bottom: 1px solid #333;
+  outline: none;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  background: transparent;
+  padding: 1px 4px;
+  display: block;
+  width: 100%;
+  text-align: center;
+}
+
+input.block-line:focus {
+  border-bottom: 2px solid #0057b7;
+  background: #eef4ff;
+}
+
+/* ---- Header area ---- */
+.header-block {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.header-block .red {
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.inline-row {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  margin: 2px 0;
+}
+
+/* ---- Parties section ---- */
+.parties-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 40px;
+  margin-bottom: 24px;
+}
+
+.party-col {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label-under {
+  font-size: 12px;
+  margin-top: 2px;
+  padding-left: 4px;
+}
+
+/* ---- TO: section ---- */
+.to-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.to-label {
+  font-weight: bold;
+  white-space: nowrap;
+  padding-top: 2px;
+}
+
+.to-inputs {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.respondents-label {
+  text-align: center;
+  font-size: 12px;
+  margin-bottom: 18px;
+}
+
+/* ---- Body paragraphs ---- */
+.body-text {
+  text-align: justify;
+  line-height: 1.8;
+  margin-bottom: 14px;
+}
+
+/* ---- Inline fields within paragraph text ---- */
+.body-text input.line {
+  vertical-align: bottom;
+}
+
+/* ---- Signature area ---- */
+.signature-area {
+  margin-top: 40px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.sig-block {
+  text-align: center;
+  width: 260px;
+}
+
+.sig-line {
+  border-top: 1px solid #333;
+  margin-bottom: 4px;
+}
+
+.sig-label {
+  font-size: 12px;
+}
+
+/* ---- Print button ---- */
+.print-btn {
+  display: block;
+  margin: 30px auto 0;
+  padding: 10px 32px;
+  background: #0057b7;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+}
+
+.print-btn:hover {
+  background: #003f8a;
+}
+
+/* Misc app helpers used by KP 7 warning flow */
+.message { padding: 8px; border-radius: 6px; margin-bottom: 8px; }
+.message.error { background: #fee2e2; color: #7f1d1d; }
+.message.success { background: #dcfce7; color: #14532d; }
+.modal { position: fixed; inset: 0; background: rgba(0,0,0,0.45); display: flex; justify-content: center; align-items: center; padding: 20px; }
+.modal-content { max-width: 520px; width: 100%; background: #fff; border-radius: 10px; padding: 18px; font-family: Arial, sans-serif; }
+.modal-actions { display: flex; gap: 8px; justify-content: flex-end; }
+.modal-actions button { border: none; border-radius: 6px; padding: 8px 12px; cursor: pointer; font-weight: 700; }
+.modal-actions button:first-child { background: #1d4ed8; color: #fff; }
+.modal-actions button:last-child { background: #e5e7eb; }
+
+@page {
+  size: letter;
+  margin: 0;
+}
+
+@media print {
+  body {
+    background: white;
+    padding: 0;
+  }
+  .page {
+    box-shadow: none;
+    padding: 40px 60px;
+    width: 8.5in;
+    min-height: 11in;
+  }
+  .print-btn,
+  .back-link,
+  .modal,
+  .message {
+    display: none;
+  }
+  input.line, input.block-line {
+    border-bottom: 1px solid #333 !important;
+    background: transparent !important;
+  }
+}
